@@ -79,9 +79,11 @@ class ItemRepositoryTest {
                 .quantity(20)
                 .build();
 
-        itemRepository.update(itemId, updateParam);
+        boolean result = itemRepository.update(itemId, updateParam);
         //then
         Item foundItem = itemRepository.findById(itemId);
+
+        assertThat(result).isTrue();
         assertThat(foundItem.getItemName()).isEqualTo("itemB");
         assertThat(foundItem.getPrice()).isEqualTo(20_000);
         assertThat(foundItem.getQuantity()).isEqualTo(20);

@@ -40,6 +40,14 @@ public class BasicItemController {
         return "basic/item";
     }
 
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+
+        return "basic/editForm";
+    }
+
     @GetMapping("/add")
     public String addForm() {
         return "basic/addForm";
@@ -85,25 +93,21 @@ public class BasicItemController {
     }
 
     @PostMapping("/add")
-    public String addItemV5(Item item, RedirectAttributes redirectAttributes) {
+    public String addItemV5(@ModelAttribute("item") Item item, RedirectAttributes redirectAttributes) {
         Item savedItem = itemRepository.save(item);
+        boolean testParam = savedItem.getId() > 0;
         redirectAttributes.addAttribute("itemId", savedItem.getId());
-        redirectAttributes.addAttribute("status", true); // query param으로 전송 ?status=true
+        redirectAttributes.addAttribute("status", testParam); // query param으로 전송 ?status=true
 
         return "redirect:/basic/items/{itemId}";
     }
 
-    @GetMapping("/{itemId}/edit")
-    public String editForm(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
-        model.addAttribute("item", item);
 
-        return "basic/editForm";
-    }
 
     @PostMapping("/{itemId}/edit")
-    public String updateForm(@PathVariable Long itemId, @ModelAttribute("item") Item updateitem) {
-        itemRepository.update(itemId, updateitem);
+    public String updateForm(@PathVariable Long itemId, @ModelAttribute("item") Item updateitem,  RedirectAttributes redirectAttributes) {
+        boolean updateTestParam = itemRepository.update(itemId, updateitem);
+        redirectAttributes.addAttribute("updateStatus", updateTestParam);
         return "redirect:/basic/items/{itemId}";
     }
 

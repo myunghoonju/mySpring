@@ -19,7 +19,10 @@
     </div>
 
     <!-- 추가 -->
-    <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
+    <h2 th:if="${#strings.toString(param.status)} == 'true'">저장 완료</h2>
+    <h2 th:if="${#strings.toString(param.status)} == 'false'">저장 실패</h2>
+    <h2 th:if="${#strings.toString(param.updateStatus)} == 'true'">수정 완료</h2>
+    <h2 th:if="${#strings.toString(param.updateStatus)} == 'false'">수정 실패</h2>
 
     <div>
         <label for="itemId">상품 ID</label>
