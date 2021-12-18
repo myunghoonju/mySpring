@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -71,7 +72,7 @@ public class BasicItemController {
     }
 
     //PRG (post, redirect, get :: solve refresh problem)
-    @PostMapping("/add") //Post ->
+    //@PostMapping("/add") //Post ->
     public String addItemV3(@ModelAttribute Item item) { // @ModelAttribute()지정안하면 Item 클래스 첫글자 소문자로 치환하여 처리된다.
         itemRepository.save(item);
         return "redirect:/basic/items" + item.getId(); //Redirect -> Get
@@ -81,6 +82,15 @@ public class BasicItemController {
     public String addItemV4(Item item) { // @ModelAttribute생략가능.
         itemRepository.save(item);
         return "basic/item";
+    }
+
+    @PostMapping("/add")
+    public String addItemV5(Item item, RedirectAttributes redirectAttributes) {
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true); // query param으로 전송 ?status=true
+
+        return "redirect:/basic/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
