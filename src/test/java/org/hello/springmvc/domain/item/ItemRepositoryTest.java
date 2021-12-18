@@ -21,7 +21,11 @@ class ItemRepositoryTest {
     @DisplayName("save test")
     void save() {
         //given
-        Item item = new Item("itemA", 10_000, 10);
+        Item item = Item.builder()
+                .itemName("itemA")
+                .price(10_000)
+                .quantity(10)
+                .build();
         //when
         Item savedItem = itemRepository.save(item);
         //then
@@ -35,8 +39,17 @@ class ItemRepositoryTest {
     @DisplayName("find all test")
     void findAll() {
         //given
-        Item item1 = new Item("itemA", 10_000, 10);
-        Item item2 = new Item("itemB", 20_000, 20);
+        Item item1 = Item.builder()
+                .itemName("itemA")
+                .price(10_000)
+                .quantity(10)
+                .build();
+        Item item2 = Item.builder()
+                .itemName("itemB")
+                .price(20_000)
+                .quantity(20)
+                .build();
+
         itemRepository.save(item1);
         itemRepository.save(item2);
         //when
@@ -51,11 +64,21 @@ class ItemRepositoryTest {
     @DisplayName("update item test")
     void update() {
         //given
-        Item item1 = new Item("itemA", 10_000, 10);
+        Item item1 = Item.builder()
+                .itemName("itemA")
+                .price(10_000)
+                .quantity(10)
+                .build();
+
         Item savedItem = itemRepository.save(item1);
         Long itemId = savedItem.getId();
         //when
-        Item updateParam = new Item("itemB", 20_000, 20);
+        Item updateParam = Item.builder()
+                .itemName("itemB")
+                .price(20_000)
+                .quantity(20)
+                .build();
+
         itemRepository.update(itemId, updateParam);
         //then
         Item foundItem = itemRepository.findById(itemId);
