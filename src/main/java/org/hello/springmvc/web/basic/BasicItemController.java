@@ -1,5 +1,5 @@
 package org.hello.springmvc.web.basic;
-
+/*
 import lombok.RequiredArgsConstructor;
 import org.hello.springmvc.domain.item.Item;
 import org.hello.springmvc.domain.item.ItemRepository;
@@ -110,9 +110,9 @@ public class BasicItemController {
         return "redirect:/basic/items/{itemId}";
     }
 
-    /**
+    *//**
      * test db setting
-     */
+     *//*
     @PostConstruct
     public void init() {
         Item itemA = Item.builder()
@@ -130,4 +130,6 @@ public class BasicItemController {
         itemRepository.save(itemA);
         itemRepository.save(itemB);
     }
+
 }
+ */

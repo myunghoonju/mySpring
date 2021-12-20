@@ -1,6 +1,7 @@
 package org.hello.thymleaf.basic.configurations;
 
 import org.springframework.stereotype.Component;
+/*
 
 @Component
 public class HelloBean {
@@ -9,3 +10,4 @@ public class HelloBean {
         return "Hello " + data;
     }
 }
+*/
