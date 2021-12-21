@@ -1,5 +1,7 @@
 package org.hello.springmvc.domain.item;
 
+import org.hello.itemservice.domain.Item;
+import org.hello.itemservice.domain.ItemRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,11 +81,9 @@ class ItemRepositoryTest {
                 .quantity(20)
                 .build();
 
-        boolean result = itemRepository.update(itemId, updateParam);
         //then
         Item foundItem = itemRepository.findById(itemId);
 
-        assertThat(result).isTrue();
         assertThat(foundItem.getItemName()).isEqualTo("itemB");
         assertThat(foundItem.getPrice()).isEqualTo(20_000);
         assertThat(foundItem.getQuantity()).isEqualTo(20);

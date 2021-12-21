@@ -1,5 +1,6 @@
 package org.hello.itemservice.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class Item {
     public Item() {
     }
 
+    @Builder
     public Item(String itemName, Integer price, Integer quantity) {
         this.itemName = itemName;
         this.price = price;
