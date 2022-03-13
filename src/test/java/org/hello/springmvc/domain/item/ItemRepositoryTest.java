@@ -61,32 +61,4 @@ class ItemRepositoryTest {
         assertThat(items).contains(item1, item2);
 
     }
-
-    @Test
-    @DisplayName("update item test")
-    void update() {
-        //given
-        Item item1 = Item.builder()
-                .itemName("itemA")
-                .price(10_000)
-                .quantity(10)
-                .build();
-
-        Item savedItem = itemRepository.save(item1);
-        Long itemId = savedItem.getId();
-        //when
-        Item updateParam = Item.builder()
-                .itemName("itemB")
-                .price(20_000)
-                .quantity(20)
-                .build();
-
-        //then
-        Item foundItem = itemRepository.findById(itemId);
-
-        assertThat(foundItem.getItemName()).isEqualTo("itemB");
-        assertThat(foundItem.getPrice()).isEqualTo(20_000);
-        assertThat(foundItem.getQuantity()).isEqualTo(20);
-    }
-
 }
